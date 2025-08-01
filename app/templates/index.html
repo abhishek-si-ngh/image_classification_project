@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Classifier</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.1rem;
+    }
+    form {
+      margin-top: 30px;
+      background-color: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+    }
+    input[type="file"] {
+      margin: 15px 0;
+    }
+    button {
+      padding: 10px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #00adb5;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #019ca4;
+    }
+    .prediction-box {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+    #preview {
+      margin-top: 20px;
+      max-width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00000080;
+    }
+    .instructions {
+      background-color: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Image Classification Model</h1>
+  <p>Upload an image and get its predicted class</p>
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="instructions">
+      Please upload a clear image of one of the following types:<br>
+      <strong>Animals (Cat, Dog, Bird, etc.)</strong>, 
+      <strong>Vehicles (Car, Truck, Airplane, Ship)</strong>, 
+      <strong>Fashion Items (Shirt, Shoe, Dress)</strong>, or 
+      <strong>Handwritten Digits (0–9)</strong>.
+    </div>
+
+    <input type="file" name="image" accept="image/*" required onchange="previewImage(event)">
+    <br>
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if prediction %}
+    <div class="prediction-box">
+      {{ prediction }}
+    </div>
+  {% endif %}
+
+  <div>
+    <img id="preview" src="#" alt="Image Preview" style="display: none;">
+  </div>
+
+  <script>
+    function previewImage(event) {
+      var output = document.getElementById('preview');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

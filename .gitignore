@@ -1,0 +1,13 @@
+# Ignore virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Ignore model weights and datasets
+*.h5
+*.zip
+*.csv
+
+# Ignore system files
+.DS_Store
+*.log
