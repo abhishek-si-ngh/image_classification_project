@@ -80,7 +80,7 @@ nbformat==5.10.4
 nest-asyncio==1.6.0
 notebook==7.4.4
 notebook_shim==0.2.4
-numpy==2.2.6
+numpy==1.26.4
 opencv-python==4.12.0.88
 opt_einsum==3.4.0
 optree==0.17.0
@@ -103,7 +103,7 @@ python-dateutil==2.9.0.post0
 python-json-logger==3.3.0
 pytz==2025.2
 scikit-learn==1.5.0
-scipy==1.13.1
+scipy==1.12.0
 six==1.16.0
 soupsieve==2.5
 stack-data==0.6.3
