@@ -4,7 +4,6 @@ __pycache__/
 *.pyc
 
 # Ignore model weights and datasets
-*.h5
 *.zip
 *.csv
 
