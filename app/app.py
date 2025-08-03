@@ -23,23 +23,29 @@ class_names = [
 @app.route('/', methods=['GET', 'POST'])
 def index():
     prediction = None
-    image_file = None  # define upfront to avoid UnboundLocalError
+    image_file = None
+    image_path = None
 
     if request.method == 'POST':
         image_file = request.files['image']
         if image_file:
-            img_path = os.path.join('static', image_file.filename)
-            image_file.save(img_path)
+            # Ensure 'static' directory exists
+            os.makedirs('static', exist_ok=True)
 
-            img = Image.open(img_path).resize((32, 32)).convert('RGB')
+            image_path = os.path.join('static', image_file.filename)
+            image_file.save(image_path)
+
+            # Preprocess image
+            img = Image.open(image_path).resize((32, 32)).convert('RGB')
             img_array = np.array(img) / 255.0
             img_array = np.expand_dims(img_array, axis=0)
 
+            # Predict
             pred = model.predict(img_array)
             predicted_label = class_names[np.argmax(pred)]
             prediction = f"Predicted Class: {predicted_label}"
 
-    return render_template('index.html', prediction=prediction)
+    return render_template('index.html', prediction=prediction, image_path=image_path)
 
 if __name__ == '__main__':
     app.run(debug=True)
