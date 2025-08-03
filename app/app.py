@@ -6,7 +6,10 @@ import numpy as np
 import os
 
 app = Flask(__name__)
-model = load_model('../model/combined_image_classifier.h5')
+
+# Dynamically build absolute path to the model
+model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'model', 'combined_image_classifier.h5')
+model = load_model(model_path)
 
 # Class labels (adjust if needed)
 class_names = [
